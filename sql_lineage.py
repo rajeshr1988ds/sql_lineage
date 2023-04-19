@@ -47,9 +47,12 @@ for i in cleaned_query_list:
 
 master_table =pd.DataFrame(query, columns=['sql_query'])
 master_table['query_no']=query_no
-table_name =[string.lstrip('from ').lstrip('left ').lstrip('right ').lstrip('inner ').lstrip('join ').lstrip('into ') 
-             for string in table_name]
-master_table['table_name']=table_name
+keywords = ["delete from", "from", "left join", "right join", "inner join", "join", "insert into"]
+table_name_cleaned =[]
+for string in table_name:
+    words = string.split()
+    table_name_cleaned.append(words[-1])
+master_table['table_name']=table_name_cleaned
 
         
        
